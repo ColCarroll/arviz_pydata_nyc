@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Tidy and beautiful</title>
+
+		<link rel="shortcut icon" type="image/png" href="img/favicon.ico"/>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/tufte.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Tidy and beautiful</h1>
+					<h3> Visualizing Bayesian models with xarray and ArviZ</h3>
+
+					<div>
+						<table style="width: 90%">
+							<tr>
+								<td>
+									<img data-src="img/xarray.png" />
+								</td>
+								<td>
+									<img data-src="img/arviz.png" />
+								</td>
+							</tr>
+						</table>
+
+						<table class="title" style="float: bottom;">
+							<tr>
+								<td>
+									<h5><em>Colin Carroll,</em> PyData NYC</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<small>October 17, 2018</small>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+
+				<section>
+					<h2>What is Bayesian Inference?</h2>
+					$$
+						P(\theta | X) = \frac{P(X | \theta) P(\theta)}{P(X)}
+					$$
+					<div class=plots>
+						<img class="fragment" data-src="img/graph1.png"/>
+						<img class="fragment fade-in" data-src="img/graph2.png"/>
+					</div>
+
+				</section>
+
+				<section>
+					<h2>Point Estimates</h2>
+					<div class=plots>
+						<img class="fragment" data-src="img/linear1.png"/>
+						<img class="fragment fade-in" data-src="img/linear2.png"/>
+					</div>
+				</section>
+
+
+				<section>
+					<h2>Uncertainty</h2>
+					<div class=plots>
+						<img class="fragment" data-src="img/uncertainty1.png"/>
+						<img class="fragment fade-in" data-src="img/uncertainty2.png"/>
+					</div>
+				</section>
+
+				<section>
+					<h2>Uncertainty</h2>
+					<div class=plots>
+						<img class="fragment" data-src="img/linear_bayes1.png"/>
+						<img class="fragment fade-in-then-out" data-src="img/linear_bayes2.png"/>
+						<img class="fragment fade-in" data-src="img/linear_bayes3.png"/>
+					</div>
+				</section>
+
+				<section>
+					<h2>How are Uncertainty Estimates Stored?</h2>
+
+					<table>
+						<tr>
+							<th>Library</td>
+							<th>Methods on fit object</td>
+							<th>Favorite method name</td>
+							<th>Can you save?</td>
+							<th>Can you pickle?</td>
+						</tr>
+
+						<tr>
+							<td>PyMC3</td>
+							<td>96</td>
+							<td>_old_theano_config</td>
+							<td>Sort of</td>
+							<td>Yes</td>
+						</tr>
+
+						<tr>
+							<td>PyStan</td>
+							<td>46</td>
+							<td>module_bytes</td>
+							<td>No</td>
+							<td>Yes, with model</td>
+						</tr>
+
+						<tr>
+							<td>emcee</td>
+							<td>59</td>
+							<td>_propose_stretch</td>
+							<td>No</td>
+							<td>Yes</td>
+						</tr>
+
+						<tr>
+							<td>Pyro</td>
+							<td>42</td>
+							<td>_abc_negative_cache_version</td>
+							<td>No</td>
+							<td>If you delete some things</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h2>What is the goal?</h2>
+					<div class=plots style="height: 390px">
+						<img class="fragment" data-src="img/box1.png"/>
+						<img class="fragment fade-in-then-out" data-src="img/box2.png"/>
+						<img class="fragment fade-in" data-src="img/box3.png"/>
+					</div>
+				</section>
+				<section>
+					<h2>We want pandas!</h2>
+					<img src='img/panda.jpg'/>
+				</section>
+
+				<section>
+					<h2>...high-dimensional pandas!</h2>
+					<img src='img/high_dimensional_pandas.png' height="300px"/>
+				</section>
+
+				<section>
+					<h2>xarray</h2>
+					<img data-src="img/xarray.png" height="300px"/>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				width: 1024,
+				height: 576,
+				center: false,
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				Reveal.nextFragment();
+			} );
+		</script>
+	</body>
+</html>
