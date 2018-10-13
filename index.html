@@ -1,193 +1,485 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Tidy and beautiful</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="shortcut icon" type="image/png" href="img/favicon.ico"/>
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/tufte.css">
+	<title>Tidy and beautiful</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/tufte.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>Tidy and beautiful</h1>
-					<h3> Visualizing Bayesian models with xarray and ArviZ</h3>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-					<div>
-						<table style="width: 90%">
-							<tr>
-								<td>
-									<img data-src="img/xarray.png" />
-								</td>
-								<td>
-									<img data-src="img/arviz.png" />
-								</td>
-							</tr>
-						</table>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
 
-						<table class="title" style="float: bottom;">
-							<tr>
-								<td>
-									<h5><em>Colin Carroll,</em> PyData NYC</h5>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<small>October 17, 2018</small>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</section>
+<body>
+	<div class="reveal">
+		<div class="slides">
 
-				<section>
-					<h2>What is Bayesian Inference?</h2>
-					$$
-						P(\theta | X) = \frac{P(X | \theta) P(\theta)}{P(X)}
-					$$
-					<div class=plots>
-						<img class="fragment" data-src="img/graph1.png"/>
-						<img class="fragment fade-in" data-src="img/graph2.png"/>
-					</div>
+			<section>
+				<h1>Tidy and beautiful</h1>
+				<h3> Visualizing Bayesian models with xarray and ArviZ</h3>
 
-				</section>
-
-				<section>
-					<h2>Point Estimates</h2>
-					<div class=plots>
-						<img class="fragment" data-src="img/linear1.png"/>
-						<img class="fragment fade-in" data-src="img/linear2.png"/>
-					</div>
-				</section>
-
-
-				<section>
-					<h2>Uncertainty</h2>
-					<div class=plots>
-						<img class="fragment" data-src="img/uncertainty1.png"/>
-						<img class="fragment fade-in" data-src="img/uncertainty2.png"/>
-					</div>
-				</section>
-
-				<section>
-					<h2>Uncertainty</h2>
-					<div class=plots>
-						<img class="fragment" data-src="img/linear_bayes1.png"/>
-						<img class="fragment fade-in-then-out" data-src="img/linear_bayes2.png"/>
-						<img class="fragment fade-in" data-src="img/linear_bayes3.png"/>
-					</div>
-				</section>
-
-				<section>
-					<h2>How are Uncertainty Estimates Stored?</h2>
-
-					<table>
+				<div>
+					<table style="width: 70%">
 						<tr>
-							<th>Library</td>
-							<th>Methods on fit object</td>
-							<th>Favorite method name</td>
-							<th>Can you save?</td>
-							<th>Can you pickle?</td>
-						</tr>
-
-						<tr>
-							<td>PyMC3</td>
-							<td>96</td>
-							<td>_old_theano_config</td>
-							<td>Sort of</td>
-							<td>Yes</td>
-						</tr>
-
-						<tr>
-							<td>PyStan</td>
-							<td>46</td>
-							<td>module_bytes</td>
-							<td>No</td>
-							<td>Yes, with model</td>
-						</tr>
-
-						<tr>
-							<td>emcee</td>
-							<td>59</td>
-							<td>_propose_stretch</td>
-							<td>No</td>
-							<td>Yes</td>
-						</tr>
-
-						<tr>
-							<td>Pyro</td>
-							<td>42</td>
-							<td>_abc_negative_cache_version</td>
-							<td>No</td>
-							<td>If you delete some things</td>
+							<td>
+								<img data-src="img/xarray.png" />
+							</td>
+							<td>
+								<img data-src="img/arviz.png" />
+							</td>
 						</tr>
 					</table>
-				</section>
-				<section>
-					<h2>What is the goal?</h2>
-					<div class=plots style="height: 390px">
-						<img class="fragment" data-src="img/box1.png"/>
-						<img class="fragment fade-in-then-out" data-src="img/box2.png"/>
-						<img class="fragment fade-in" data-src="img/box3.png"/>
-					</div>
-				</section>
-				<section>
-					<h2>We want pandas!</h2>
-					<img src='img/panda.jpg'/>
-				</section>
 
-				<section>
-					<h2>...high-dimensional pandas!</h2>
-					<img src='img/high_dimensional_pandas.png' height="300px"/>
-				</section>
+					<table class="title" style="float: bottom;">
 
-				<section>
-					<h2>xarray</h2>
-					<img data-src="img/xarray.png" height="300px"/>
-				</section>
+						<tr>
+							<td>
+								<h5><em>Colin Carroll,</em> PyData NYC</h5>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<small>October 17, 2018</small>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 
-			</div>
+			<section>
+
+				<ul>
+					<li>What is Bayesian inference?</li>
+					<li>What is ArviZ?</li>
+					<li>What can I learn from ArviZ?</li>
+				</ul>
+
+			</section>
+
+			<section>
+				<h2>What is Bayesian Inference?</h2>
+				$$
+				P(\theta | X) = \frac{P(X | \theta) P(\theta)}{P(X)}
+				$$
+
+				<div class=plots style="left: 180px; top: 40px">
+					<img class="fragment fade-in-then-out" data-src="img/graph1.png" />
+					<img class="fragment fade-in" data-src="img/graph2.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>What is Bayesian Inference?</h2>
+				$$
+				P(\text{slope, intcpt.} | x, y) = \frac{P(x, y | \text{slope, intcpt.}) P(\text{slope, intcpt.})}{P(x, y)}
+				$$
+				<br>
+
+				$$
+				y = \text{slope} \cdot x + \text{intcpt.}
+				$$
+				<div class=plots style="left: 180px; top: 40px">
+					<img data-src="img/graph2.png" />
+				</div>
+
+			</section>
+
+			<section>
+				<h2>Point Estimates</h2>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/linear1.png" />
+					<img class="fragment fade-in" data-src="img/linear2.png" />
+				</div>
+			</section>
+
+
+			<section>
+				<h2>Uncertainty</h2>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/uncertainty1.png" />
+					<img class="fragment fade-in" data-src="img/uncertainty2.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Uncertainty</h2>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/linear_bayes1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/linear_bayes2.png" />
+					<img class="fragment fade-in" data-src="img/linear_bayes3.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Uncertainty</h2>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/mixture1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/mixture2.png" />
+					<img class="fragment fade-in" data-src="img/mixture3.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>What is
+					<img data-src="img/arviz.png" height=100px style="bottom: 0; margin: 0" />?</h2>
+			</section>
+
+			<section>
+				<h2>Visualization</h2>
+				<pre><code class="python">
+			x = np.random.rand(200)
+			y = np.random.rand(200)
+			data = {
+				'x': x,
+				'y': y,
+				'z': x - y,
+			}
+					</code></pre>
+			</section>
+
+			<section>
+				<h2>Visualization</h2>
+				<pre><code class=python>az.plot_pair(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/pair1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/pair2.png" />
+					<img class="fragment fade-in" data-src="img/pair3.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Visualization</h2>
+				<pre><code class=python>az.plot_forest(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/ridge1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/ridge2.png" />
+					<img class="fragment fade-in-then-out" data-src="img/ridge3.png" />
+					<img class="fragment fade-in-then-out" data-src="img/ridge4.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Visualization</h2>
+				<pre><code class=python>az.plot_joint(...)</code></pre>
+				<table style="width: 70%">
+					<tr>
+						<td>
+							<img data-src="img/joint1.png" />
+						</td>
+						<td>
+							<img data-src="img/joint2.png" />
+						</td>
+					</tr>
+				</table>
+			</section>
+
+
+			<section>
+				<h2>Diagnostics</h2>
+				<ul>
+					<li>Does the model fit the data?</li>
+					<li>Does the algorithm fit the model?</li>
+				</ul>
+				<pre><code>az.load_arviz_data('centered_eight')
+az.load_arviz_data('non_centered_eight')</code></pre>
+			</section>
+
+			<section>
+				<h2>Diagnostics</h2>
+				<pre><code class=python>az.plot_trace(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/trace1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/trace2.png" />
+					<img class="fragment fade-in-then-out" data-src="img/trace3.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Diagnostics</h2>
+				<pre><code class=python>az.plot_energy(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/energy1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/energy2.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Diagnostics</h2>
+				<pre><code class=python>az.plot_pair(..., divergences=True)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/pairdiv1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/pairdiv2.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Diagnostics</h2>
+				<pre><code class=python>az.plot_parallel(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/parallel1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/parallel2.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>Diagnostics</h2>
+				<pre><code class=python>az.summary(...)</code></pre>
+
+				<table border="1" class="dataframe">
+					<thead>
+						<tr style="text-align: right;">
+							<th></th>
+							<th>mean</th>
+							<th>sd</th>
+							<th>mc error</th>
+							<th>hpd 3%</th>
+							<th>hpd 97%</th>
+							<th>eff_n</th>
+							<th>r_hat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>mu</th>
+							<td>4.52</td>
+							<td>3.31</td>
+							<td>0.09</td>
+							<td>-1.27</td>
+							<td>10.76</td>
+							<td>333.0</td>
+							<td>1.00</td>
+						</tr>
+						<tr>
+							<th>tau</th>
+							<td>4.44</td>
+							<td>3.37</td>
+							<td>0.34</td>
+							<td>0.75</td>
+							<td>10.38</td>
+							<td>71.0</td>
+							<td>1.05</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<br>
+				<hl></hl>
+
+				<table border="1" class="dataframe">
+					<thead>
+						<tr style="text-align: right;">
+							<th></th>
+							<th>mean</th>
+							<th>sd</th>
+							<th>mc error</th>
+							<th>hpd 3%</th>
+							<th>hpd 97%</th>
+							<th>eff_n</th>
+							<th>r_hat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>mu</th>
+							<td>4.23</td>
+							<td>3.41</td>
+							<td>0.05</td>
+							<td>-2.23</td>
+							<td>10.68</td>
+							<td>1918.0</td>
+							<td>1.0</td>
+						</tr>
+						<tr>
+							<th>tau</th>
+							<td>3.70</td>
+							<td>3.34</td>
+							<td>0.05</td>
+							<td>0.00</td>
+							<td>9.61</td>
+							<td>1291.0</td>
+							<td>1.0</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</section>
+
+			<section>
+				<h2>What is the goal?</h2>
+				<div class=plots style="height: 390px; left: 100px">
+					<img class="fragment" data-src="img/box1.png" />
+					<img class="fragment fade-in-then-out" data-src="img/box2.png" />
+					<img class="fragment fade-in" data-src="img/box3.png" />
+				</div>
+			</section>
+
+			<section>
+				<h2>How are Uncertainty Estimates Stored?</h2>
+
+				<table>
+					<tr>
+						<th>Library</td>
+						<th>Methods on fit object</td>
+						<th>Favorite method name</td>
+						<th>Can you save?</td>
+						<th>Can you pickle?</td>
+					</tr>
+
+					<tr>
+						<td>PyMC3</td>
+						<td>96</td>
+						<td>_old_theano_config</td>
+						<td>Sort of</td>
+						<td>Yes</td>
+					</tr>
+
+					<tr>
+						<td>PyStan</td>
+						<td>46</td>
+						<td>module_bytes</td>
+						<td>No</td>
+						<td>Yes, with model</td>
+					</tr>
+
+					<tr>
+						<td>emcee</td>
+						<td>59</td>
+						<td>_propose_stretch</td>
+						<td>No</td>
+						<td>Yes</td>
+					</tr>
+
+					<tr>
+						<td>Pyro</td>
+						<td>42</td>
+						<td>_abc_negative_cache_version</td>
+						<td>No</td>
+						<td>If you delete some things</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h2>We want pandas!</h2>
+				<img src='img/panda.jpg' />
+			</section>
+
+			<section>
+				<h2>...high-dimensional pandas!</h2>
+				<img src='img/high_dimensional_pandas.png' height="300px" />
+			</section>
+
+			<section>
+				<h2>xarray</h2>
+				<img data-src="img/xarray.png" height="300px" />
+			</section>
+
+			<section>
+				<h2>Inference Data</h2>
+				<img data-src="img/inference_data.png" height="400px" />
+			</section>
+
+			<section>
+				<h2>Inference Data</h2>
+				<pre><code class=python>&gt az.load_arviz_data('centered_eight')
+Inference data with groups:
+	> posterior
+	> sample_stats
+	> posterior_predictive
+	> prior
+	> observed_data</code></pre>
+			</section>
+
+			<section>
+				<h2>Inference Data</h2>
+				<pre><code class=python>&gt centered_eight.posterior
+Dimensions:  (chain: 4, draw: 500, school: 8)
+Coordinates:
+  * chain    (chain) int64 0 1 2 3
+  * draw     (draw) int64 0 1 2 3 4 5 6 7 8 ... 496 497 498 499
+  * school   (school) object 'Choate' 'Deerfield' ... 'Mt. Hermon'
+Data variables:
+    mu       (chain, draw) float64 ...
+    theta    (chain, draw, school) float64 ...
+    tau      (chain, draw) float64 ...
+Attributes:
+    created_at:                 2018-10-05T15:28:15.577753
+    inference_library:          pymc3
+    inference_library_version:  3.5</code></pre>
+			</section>
+
+			<section>
+				<h2>What does ArviZ work with?</h2>
+				<span class="fragment fade-in"></span>
+				<pre class="fragment fade-in"><code class=python>az.from_pystan(...)
+az.from_pymc3(...)
+az.from_emcee(...)
+az.from_pyro(...)
+az.from_cmdstan(...)
+
+# works for all the above, and for
+# numpy arrays and dictionaries
+az.convert_to_inference_data(...)</code></pre>
+			</section>
+
+			<section>
+				<h2>Help!</h2>
+
+				<pre><code>az.load_arviz_data('...')</code></pre>
+			</section>
+
+			<section>
+				<h2>Thank You!</h2>
+				<pre><code class=python>			 pip install arviz</code></pre>
+				<img data-src="img/arviz.png" height=150< />
+				<ul>
+					<li>github.com/arviz-devs/arviz</li>
+					<li>arviz-devs.github.io/arviz/</li>
+					<li>@colindcarroll</li>
+				</ul>
+			</section>
+
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				width: 1024,
-				height: 576,
-				center: false,
-				history: true,
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/math/math.js', async: true }
-				]
-			});
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-				Reveal.nextFragment();
-			} );
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			width: 1024,
+			height: 576,
+			center: false,
+			history: true,
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/math/math.js', async: true }
+			]
+		});
+		Reveal.addEventListener('slidechanged', function (event) {
+			Reveal.nextFragment();
+		});
+	</script>
+</body>
+
 </html>
