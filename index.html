@@ -33,7 +33,7 @@
 				<h3> Visualizing Bayesian models with xarray and ArviZ</h3>
 
 				<div>
-					<table style="width: 70%">
+					<table style="width: 60%">
 						<tr>
 							<td>
 								<img data-src="img/xarray.png" />
@@ -48,19 +48,19 @@
 
 						<tr>
 							<td>
-								<h5><em>Colin Carroll,</em> PyData NYC</h5>
+								<em>Colin Carroll</em>, Freebird, Inc
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<small>October 17, 2018</small>
+								PyData NYC, October 17, 2018
 							</td>
 						</tr>
 					</table>
 				</div>
 			</section>
 
-			<section>
+			<section class="center">
 
 				<ul>
 					<li>What is Bayesian inference?</li>
@@ -71,30 +71,30 @@
 			</section>
 
 			<section>
-				<h2>What is Bayesian Inference?</h2>
-				$$
-				P(\theta | X) = \frac{P(X | \theta) P(\theta)}{P(X)}
-				$$
 
-				<div class=plots style="left: 180px; top: 40px">
-					<img class="fragment fade-in-then-out" data-src="img/graph1.png" />
-					<img class="fragment fade-in" data-src="img/graph2.png" />
-				</div>
+				<h2>What is Bayesian Inference?</h2>
+				<br>
+				<p style="font-size: 64px;">
+					$$
+					P(\theta | X) = \frac{P(X | \theta) P(\theta)}{P(X)}
+					$$
+				</p>
+
 			</section>
 
-			<section>
-				<h2>What is Bayesian Inference?</h2>
-				$$
-				P(\text{slope, intcpt.} | x, y) = \frac{P(x, y | \text{slope, intcpt.}) P(\text{slope, intcpt.})}{P(x, y)}
-				$$
+			<section class="center">
+				<p>
+					$$
+					P(\text{slope, intcpt.} | x, y) = \frac{P(x, y | \text{slope, intcpt.}) P(\text{slope, intcpt.})}{P(x, y)}
+					$$
+				</p>
+
 				<br>
 
-				$$
-				y = \text{slope} \cdot x + \text{intcpt.}
-				$$
-				<div class=plots style="left: 180px; top: 40px">
-					<img data-src="img/graph2.png" />
-				</div>
+				<p style="font-size: 64px;">
+					$$
+					y = \text{slope} \cdot x + \text{intercept}
+					$$
 
 			</section>
 
@@ -133,7 +133,7 @@
 				</div>
 			</section>
 
-			<section>
+			<section class="center">
 				<h2>What is
 					<img data-src="img/arviz.png" height=100px style="bottom: 0; margin: 0" />?</h2>
 			</section>
@@ -149,6 +149,15 @@
 				'z': x - y,
 			}
 					</code></pre>
+			</section>
+
+			<section>
+				<h2>Visualization</h2>
+				<pre><code class=python>az.plot_density(...)</code></pre>
+				<div class=plots>
+					<img class="fragment fade-in-then-out" data-src="img/density1.png" />
+					<img class="fragment fade-in" data-src="img/density2.png" />
+				</div>
 			</section>
 
 			<section>
@@ -445,7 +454,7 @@ az.convert_to_inference_data(...)</code></pre>
 			<section>
 				<h2>Thank You!</h2>
 				<pre><code class=python>			 pip install arviz</code></pre>
-				<img data-src="img/arviz.png" height=150< />
+				<img data-src="img/freebird.gif" height=250< />
 				<ul>
 					<li>github.com/arviz-devs/arviz</li>
 					<li>arviz-devs.github.io/arviz/</li>
