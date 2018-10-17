@@ -1,7 +1,7 @@
 
 # Outline
 
-Thank you for being here. This is a very exciting talk to give. ArviZ is an open source library for visualizing and criticising Bayesian anaylsis in Python. We have been working hard on it for about 8 months, and I am really excited to start sharing it with the larger PyData community.
+Thank you for being here. I am Colin Carroll. I am a data scientist at Freebird in Cambridge, MA, and also an open source contributor in my spare time. I have done a lot of work on PyMC3, which inspired this work. This is a very exciting talk to give. ArviZ is an open source library for visualizing and criticising Bayesian anaylsis in Python. We have been working hard on it for about 8 months, and I am really excited to start sharing it with the larger PyData community.
 
 -------------
 
